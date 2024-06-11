@@ -7,10 +7,19 @@ int main() {
 	
 	int i, j, num = 1, qtd = 1, matriz[3][3];
 	
-	// Colocar os valores das posiÃ§Ãµes
+	printf("         ___  _______  _______  _______    ______   _______    __   __  _______  ___      __   __  _______ \n");
+	printf("        |   ||       ||       ||       |  |      | |   _   |  |  | |  ||       ||   |    |  | |  ||   _   |\n");
+	printf("        |   ||   _   ||    ___||   _   |  |  _    ||  |_|  |  |  |_|  ||    ___||   |    |  |_|  ||  |_|  |\n");
+	printf("        |   ||  | |  ||   | __ |  | |  |  | | |   ||       |  |       ||   |___ |   |    |       ||       |\n");
+	printf("     ___|   ||  |_|  ||   ||  ||  |_|  |  | |_|   ||       |  |       ||    ___||   |___ |       ||       |\n");
+	printf("    |       ||       ||   |_| ||       |  |       ||   _   |   |     | |   |___ |       ||   _   ||   _   |\n");
+	printf("    |_______||_______||_______||_______|  |______| |__| |__|    |___|  |_______||_______||__| |__||__| |__|\n");
+	printf("\n\n");
+	
+	// Colocar os valores das posições
 	for(i = 0; i < 3; i++){
 		for(j = 0; j < 3; j++){
-			matriz[i][j] = num;
+			matriz[i][j] = num; // Resolver bug pois o jogador 1 pode usar a posição 1 como vantagem
 			num++;
 		}
 	}
@@ -35,10 +44,10 @@ int main() {
 		
 		if(qtd % 2 != 0){
 			
-			// Teste para ver se a posiÃ§Ã£o esta entre 1 e 9
+			// Teste para ver se a posições esta entre 1 e 9
 			do {
 				printf("\tVez do Jogador 1 \n");
-				printf("Digite o nÃºmero referente a posiÃ§Ã£o: ");
+				printf("Digite o número referente a posição: ");
 				scanf("%d", &posicao);
 			} while(posicao < 1 || posicao > 9);
 			
@@ -72,10 +81,10 @@ int main() {
 			}
 		} else {
 			
-			// Teste para ver se a posiÃ§Ã£o esta entre 1 e 9
+			// Teste para ver se a posição esta entre 1 e 9
 			do {
 				printf("\tVez do Jogador 2 \n");
-				printf("Digite o nÃºmero referente a posiÃ§Ã£o: ");
+				printf("Digite o número referente a posição: ");
 				scanf("%d", &posicao);
 			} while(posicao < 1 || posicao > 9);
 			
@@ -109,7 +118,16 @@ int main() {
 			}
 		}
 		
-		if(matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2]){
+		if(
+		   matriz[0][0] == matriz[0][1] && matriz[0][1] == matriz[0][2] || //linhas
+		   matriz[1][0] == matriz[1][1] && matriz[1][1] == matriz[1][2] ||
+		   matriz[2][0] == matriz[2][1] && matriz[2][1] == matriz[2][2] ||
+		   matriz[0][0] == matriz[1][0] && matriz[1][0] == matriz[2][0] || //colunas
+		   matriz[0][1] == matriz[1][1] && matriz[1][1] == matriz[2][1] ||
+		   matriz[0][2] == matriz[1][2] && matriz[1][2] == matriz[2][2] ||
+		   matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2] || //diagonais
+		   matriz[2][0] == matriz[1][1] && matriz[1][1] == matriz[0][2] 
+		){
 			if(qtd % 2 != 0){
 				printf("\n\n\t O jogador 1 ganhou! \n\n");
 				break;
