@@ -5,7 +5,8 @@
 int main() {
 	setlocale(LC_ALL, "Portuguese");
 	
-	int i, j, num = 1, qtd = 1, empate = 0;
+	int i, j, num = 1, jogada = 1, empate = 0;
+	int posicoesOcupadas[9];
 	char matriz[3][3];
 	
 	printf("         ___  _______  _______  _______    ______   _______    __   __  _______  ___      __   __  _______ \n");
@@ -16,6 +17,11 @@ int main() {
 	printf("    |       ||       ||       ||       |  |       ||  | |  |   |     | |       ||       ||  | |  ||  | |  |\n");
 	printf("    |_______||_______||_______||_______|  |______| |__| |__|    |___|  |_______||_______||__| |__||__| |__|\n");
 	printf("\n\n");
+
+	//Zerar o vetor de posicoes ocupadas
+	for(i = 0; i < 9; i++){
+		posicoesOcupadas[i] = 0;
+	}
 
 	do{
 		int posicao = 0, quadrado = 1;
@@ -43,7 +49,7 @@ int main() {
 		
 		printf("\n\n");
 		
-		if(qtd % 2 != 0){
+		if(jogada % 2 != 0){
 			
 			int teste = 1;
 			
@@ -52,6 +58,21 @@ int main() {
 				printf("\tVez do Jogador 1 \n");
 				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
+				
+				// Teste para saber se a posiÁ„o j· estava ocupada
+				int aux = 0;
+				for(i = 0; i < 9; i++){
+					if(posicao == posicoesOcupadas[i]){
+						aux++;
+					}
+				}
+				if(aux > 0){
+					posicao = 999;
+					printf("\nESTA POSI«√O J¡ EST¡ OCUPADA\n\n");
+				}
+				else{
+					posicoesOcupadas[jogada-1] = posicao;
+				}
 			} while(posicao < 1 || posicao > 9);
 
 			// Aloca√ß√£o do valor na posi√ß√£o
@@ -76,6 +97,21 @@ int main() {
 				printf("\tVez do Jogador 2 \n");
 				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
+				
+				// Teste para saber se a posiÁ„o j· estava ocupada
+				int aux = 0;
+				for(i = 0; i < 9; i++){
+					if(posicao == posicoesOcupadas[i]){
+						aux++;
+					}
+				}
+				if(aux > 0){
+					posicao = 999;
+					printf("\nESTA POSI«√O J¡ EST¡ OCUPADA\n\n");
+				}
+				else{
+					posicoesOcupadas[jogada-1] = posicao;
+				}
 			} while(posicao < 1 || posicao > 9);
 
 			// Aloca√ß√£o do valor na posi√ß√£o
@@ -111,7 +147,7 @@ int main() {
 			matriz[0][0] == 'O' && matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2] || //diagonais O
 			matriz[2][0] == 'O' && matriz[2][0] == matriz[1][1] && matriz[1][1] == matriz[0][2]
 		){
-			if(qtd % 2 != 0){
+			if(jogada % 2 != 0){
 				printf("\n\n\t O jogador 1 ganhou! \n\n");
 				break;
 			} else {
@@ -122,9 +158,9 @@ int main() {
 			empate++;
 		}
 		
-		qtd++;
+		jogada++;
 		
-	} while(qtd < 10);
+	} while(jogada < 10);
 	
 	printf("\n");
 	
