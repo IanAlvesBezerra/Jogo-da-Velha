@@ -45,77 +45,51 @@ int main() {
 		
 		if(qtd % 2 != 0){
 			
-			// Teste para ver se a posiÁıes esta entre 1 e 9
+			int teste = 1;
+			
+			// Teste para ver se a posi√ß√µes esta entre 1 e 9
 			do {
 				printf("\tVez do Jogador 1 \n");
-				printf("Digite o n˙mero referente a posiÁ„o: ");
+				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
 			} while(posicao < 1 || posicao > 9);
-			
-			switch(posicao){
-				case 1:
-					matriz[0][0] = 'X';
+
+			// Aloca√ß√£o do valor na posi√ß√£o
+			for(i = 0; i < 3; i++){
+				for(j = 0; j < 3; j++){
+					if(posicao == teste){
+						matriz[i][j] = 'X';
+						teste = 999;
+					}
+					teste++;
+				}
+				if(teste == 999){
 					break;
-				case 2:
-					matriz[0][1] = 'X';
-					break;
-				case 3:
-					matriz[0][2] = 'X';
-					break;
-				case 4:
-					matriz[1][0] = 'X';
-					break;
-				case 5:
-					matriz[1][1] = 'X';
-					break;
-				case 6:
-					matriz[1][2] = 'X';
-					break;
-				case 7:
-					matriz[2][0] = 'X';
-					break;
-				case 8:
-					matriz[2][1] = 'X';
-					break;
-				default:
-					matriz[2][2] = 'X';
+				}
 			}
 		} else {
 			
-			// Teste para ver se a posiÁ„o esta entre 1 e 9
+			int teste = 1;
+			
+			// Teste para ver se a posi√ß√£o esta entre 1 e 9
 			do {
 				printf("\tVez do Jogador 2 \n");
-				printf("Digite o n˙mero referente a posiÁ„o: ");
+				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
 			} while(posicao < 1 || posicao > 9);
-			
-			switch(posicao){
-				case 1:
-					matriz[0][0] = 'O';
+
+			// Aloca√ß√£o do valor na posi√ß√£o
+			for(i = 0; i < 3; i++){
+				for(j = 0; j < 3; j++){
+					if(posicao == teste){
+						matriz[i][j] = 'O';
+						teste = 999;
+					}
+					teste++;
+				}
+				if(teste == 999){
 					break;
-				case 2:
-					matriz[0][1] = 'O';
-					break;
-				case 3:
-					matriz[0][2] = 'O';
-					break;
-				case 4:
-					matriz[1][0] = 'O';
-					break;
-				case 5:
-					matriz[1][1] = 'O';
-					break;
-				case 6:
-					matriz[1][2] = 'O';
-					break;
-				case 7:
-					matriz[2][0] = 'O';
-					break;
-				case 8:
-					matriz[2][1] = 'O';
-					break;
-				default:
-					matriz[2][2] = 'O';
+				}
 			}
 		}
 		
