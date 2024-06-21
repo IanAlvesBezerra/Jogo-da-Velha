@@ -53,13 +53,13 @@ int main() {
 			
 			int teste = 1;
 			
-			// Teste para ver se a posi√ß√µes esta entre 1 e 9
+			// Teste para ver se a posi√ß√£o esta entre 1 e 9
 			do {
 				printf("\tVez do Jogador 1 \n");
 				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
 				
-				// Teste para saber se a posiÁ„o j· estava ocupada
+				// Teste para saber se a posi√ß√£o j√° estava ocupada
 				int aux = 0;
 				for(i = 0; i < 9; i++){
 					if(posicao == posicoesOcupadas[i]){
@@ -68,7 +68,7 @@ int main() {
 				}
 				if(aux > 0){
 					posicao = 999;
-					printf("\nESTA POSI«√O J¡ EST¡ OCUPADA\n\n");
+					printf("\nESTA POSI√á√ÉO J√Å EST√Å OCUPADA\n\n");
 				}
 				else{
 					posicoesOcupadas[jogada-1] = posicao;
@@ -98,7 +98,7 @@ int main() {
 				printf("Digite o n√∫mero referente a posi√ß√£o: ");
 				scanf("%d", &posicao);
 				
-				// Teste para saber se a posiÁ„o j· estava ocupada
+				// Teste para saber se a posi√ß√£o j√° estava ocupada
 				int aux = 0;
 				for(i = 0; i < 9; i++){
 					if(posicao == posicoesOcupadas[i]){
@@ -107,7 +107,7 @@ int main() {
 				}
 				if(aux > 0){
 					posicao = 999;
-					printf("\nESTA POSI«√O J¡ EST¡ OCUPADA\n\n");
+					printf("\nESTA POSI√á√ÉO J√Å EST√Å OCUPADA\n\n");
 				}
 				else{
 					posicoesOcupadas[jogada-1] = posicao;
