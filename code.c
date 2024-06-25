@@ -1,14 +1,21 @@
 #include <stdio.h>
 #include <locale.h>
-#include <math.h>
+#include <time.h>
 
-int main() {
-	setlocale(LC_ALL, "Portuguese");
-	
-	int i, j, num = 1, jogada = 1, empate = 0;
-	int posicoesOcupadas[9];
-	char matriz[3][3];
-	
+#ifdef _WIN32
+    #include <windows.h>
+    void sleep_ms(int milliseconds) {
+        Sleep(milliseconds);
+    }
+#else
+    #include <unistd.h>
+    void sleep_ms(int milliseconds) {
+        usleep(milliseconds * 1000);
+    }
+#endif
+
+// Função para imprimir o nome
+void showName(){
 	printf("         ___  _______  _______  _______    ______   _______    __   __  _______  ___      __   __  _______ \n");
 	printf("        |   ||       ||    ___||       |  |      | |   _   |  |  | |  ||    ___||   |    |  | |  ||   _   |\n");
 	printf("        |   ||   _   ||   | __ |   _   |  |   _   ||  |_|  |  |  |_|  ||   |___ |   |    |  |_|  ||  |_|  |\n");
@@ -17,6 +24,15 @@ int main() {
 	printf("    |       ||       ||       ||       |  |       ||  | |  |   |     | |       ||       ||  | |  ||  | |  |\n");
 	printf("    |_______||_______||_______||_______|  |______| |__| |__|    |___|  |_______||_______||__| |__||__| |__|\n");
 	printf("\n\n");
+	sleep_ms(500);
+}
+
+int main() {
+	setlocale(LC_ALL, "Portuguese");
+	
+	int i, j, num = 1, jogada = 1, empate = 0;
+	int posicoesOcupadas[9];
+	char matriz[3][3];
 
 	//Zerar o vetor de posicoes ocupadas
 	for(i = 0; i < 9; i++){
@@ -24,12 +40,13 @@ int main() {
 	}
 
 	do{
+		showName();
 		int posicao = 0, quadrado = 1;
 		printf("\n");
 		
 		// Imprimir o jogo da velha completo
 		for(i = 0; i < 3; i++){
-			printf("\t\t ");
+			printf("\t\t\t\t\t\t   ");
 			for(j = 0; j < 3; j++){
 				if(matriz[i][j] == 'X' || matriz[i][j] == 'O'){
 					printf("%c ", matriz[i][j]);
@@ -43,7 +60,7 @@ int main() {
 				}
 			}
 			if(i < 2){
-				printf("\n\t\t-----------\n");
+				printf("\n\t\t\t\t\t\t  -----------\n");
 			}
 		}
 		
@@ -55,8 +72,8 @@ int main() {
 			
 			// Teste para ver se a posição esta entre 1 e 9
 			do {
-				printf("\tVez do Jogador 1 \n");
-				printf("Digite o número referente a posição: ");
+				printf("\t\t\t\t\t\tVez do Jogador 1 \n");
+				printf("\t\t\t\t\tDigite o número referente a posição: ");
 				scanf("%d", &posicao);
 				
 				// Teste para saber se a posição já estava ocupada
@@ -94,8 +111,8 @@ int main() {
 			
 			// Teste para ver se a posição esta entre 1 e 9
 			do {
-				printf("\tVez do Jogador 2 \n");
-				printf("Digite o número referente a posição: ");
+				printf("\t\t\t\t\t\tVez do Jogador 2 \n");
+				printf("\t\t\t\t\tDigite o número referente a posição: ");
 				scanf("%d", &posicao);
 				
 				// Teste para saber se a posição já estava ocupada
@@ -107,7 +124,7 @@ int main() {
 				}
 				if(aux > 0){
 					posicao = 999;
-					printf("\nESTA POSIÇÃO JÁ ESTÁ OCUPADA\n\n");
+					printf("\n\t\t\t\t\tESTA POSIÇÃO JÁ ESTÁ OCUPADA\n\n");
 				}
 				else{
 					posicoesOcupadas[jogada-1] = posicao;
@@ -147,26 +164,26 @@ int main() {
 			matriz[0][0] == 'O' && matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2] || //diagonais O
 			matriz[2][0] == 'O' && matriz[2][0] == matriz[1][1] && matriz[1][1] == matriz[0][2]
 		){
-			if(jogada % 2 != 0){
-				printf("\n\n\t O jogador 1 ganhou! \n\n");
-				break;
-			} else {
-				printf("\n\n\t O jogador 2 ganhou! \n\n");
-				break;
-			}
+			printf(jogada % 2 != 0 ? "\n\n\t\t\t\t\t      O jogador 1 ganhou! \n\n" : "\n\n\t\t\t\t\t      O jogador 2 ganhou! \n\n");
+			break;
 		} else {
 			empate++;
 		}
 		
 		jogada++;
+		system("cls || clear");
 		
 	} while(jogada < 10);
 	
+	if(empate == 9){
+		showName();
+		printf("\n\t\t\t\t\t\t     EMPATE\n");
+	}
 	printf("\n");
 	
 	// Imprimir o jogo da velha completo para mostar resultado
 	for(i = 0; i < 3; i++){
-		printf("\t\t ");
+		printf("\t\t\t\t\t\t   ");
 		for(j = 0; j < 3; j++){
 			if(matriz[i][j] == 'X' || matriz[i][j] == 'O'){
 				printf("%c ", matriz[i][j]);
@@ -178,13 +195,10 @@ int main() {
 			}
 		}
 		if(i < 2){
-			printf("\n\t\t-----------\n");
+			printf("\n\t\t\t\t\t\t  -----------\n");
 		}
 	}
 	
-	if(empate == 9){
-		printf("\n\n\t\tEMPATE");
-	}
 	printf("\n\n");
 	
 	system("PAUSE");
